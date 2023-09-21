@@ -2,10 +2,9 @@ import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
 
 interface CreatePrivateSubnetArgs {
-  az: string;
-  cidr: string;
   vpcId: pulumi.Input<string>;
-  natGatewayId?: pulumi.Input<string>;
+  cidr: string;
+  az: string;
   defaultTags: Record<string, string>;
 }
 
@@ -15,37 +14,40 @@ export class PrivateSubnet {
 
   private routeTable: aws.ec2.RouteTable;
 
-  constructor(args: CreatePrivateSubnetArgs) {
-    const subnet = new aws.ec2.Subnet(`my-private-subnet-${args.az}`, {
+  private defaultRoute?: aws.ec2.Route;
+
+  constructor(name: string, args: CreatePrivateSubnetArgs) {
+    this.name = name;
+
+    this.subnet = new aws.ec2.Subnet(this.name, {
       vpcId: args.vpcId,
       cidrBlock: args.cidr,
       availabilityZone: args.az,
       tags: {
-        "Name": `my-private-subnet-${args.az}`,
+        "Name": this.name,
         ...args.defaultTags
       }
     });
 
-    const rt = new aws.ec2.RouteTable(`my-private-subnet-${args.az}-rt`, {
+    this.routeTable = new aws.ec2.RouteTable(`${this.name}-rt`, {
       vpcId: args.vpcId,
       tags: {
-        'Name': `my-private-subnet-${args.az}-rt`,
+        'Name': `${this.name}-rt`,
         ...args.defaultTags
       }
     });
 
-    new aws.ec2.RouteTableAssociation(`my-private-subnet-${args.az}-rt-association`, {
-      routeTableId: rt.id,
-      subnetId: subnet.id,
+    new aws.ec2.RouteTableAssociation(`${this.name}-rt-association`, {
+      routeTableId: this.routeTable.id,
+      subnetId: this.subnet.id,
     });
-
-    this.name = `my-private-subnet-${args.az}`;
-    this.subnet = subnet;
-    this.routeTable = rt;
   }
 
   addNatGateway(natGatewayId: pulumi.Input<string>) {
-    new aws.ec2.Route(`${this.name}-nat-gateway-route`, {
+    if (this.defaultRoute) {
+      throw new Error('Cannot add a NAT gateway to a subnet that already has a default route');
+    }
+    this.defaultRoute = new aws.ec2.Route(`${this.name}-nat-gateway-route`, {
       routeTableId: this.routeTable.id,
       destinationCidrBlock: '0.0.0.0/0',
       natGatewayId: natGatewayId,

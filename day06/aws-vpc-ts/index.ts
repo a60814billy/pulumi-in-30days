@@ -122,12 +122,11 @@ export = async function () {
 
   const privateSubnets: Record<string, aws.ec2.Subnet> = {};
   for (const arg of privateSubnetArgs) {
-    const createdSubnet = new PrivateSubnet({
-      az: arg.az,
-      cidr: arg.cidr,
+    const createdSubnet = new PrivateSubnet(`my-private-subnet-${arg.az}`, {
       vpcId: myVpc.id,
+      cidr: arg.cidr,
+      az: arg.az,
       defaultTags: defaultTags,
-      natGatewayId: natGateway.id,
     });
     createdSubnet.addNatGateway(natGateway.id);
     privateSubnets[createdSubnet.name] = createdSubnet.subnet;

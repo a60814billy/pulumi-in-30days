@@ -1,5 +1,5 @@
 {
-    "name": "aws-vpc-ts",
+    "name": "day06-aws-vpc-ts",
     "main": "index.ts",
     "devDependencies": {
         "@types/node": "^16"

@@ -1,4 +1,3 @@
-import pulumi
 import pulumi_aws as aws
 
 from cidr_subnet_utils import split_subnets
@@ -17,10 +16,7 @@ az_names = non_local_availability_zones.names
 # 建立 VPC
 vpc = aws.ec2.Vpc('my-vpc',
                   cidr_block='10.120.0.0/16',
-                  enable_dns_hostnames=True,
-                  opts=pulumi.ResourceOptions(
-                      protect=True,
-                  ))
+                  enable_dns_hostnames=True)
 
 # 建立 IGW
 igw = aws.ec2.InternetGateway('my-igw',

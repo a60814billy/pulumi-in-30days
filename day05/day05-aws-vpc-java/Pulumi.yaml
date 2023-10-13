@@ -1,0 +1,3 @@
+name: day05-aws-vpc-java
+description: A minimal Java Pulumi program
+runtime: java

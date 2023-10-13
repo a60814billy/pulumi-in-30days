@@ -1,0 +1,3 @@
+name: day05-aws-vpc-cs
+runtime: dotnet
+description: A minimal C# Pulumi program

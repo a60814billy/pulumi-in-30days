@@ -1,0 +1,3 @@
+name: pulumi-hello-world-cs
+runtime: dotnet
+description: A minimal C# Pulumi program

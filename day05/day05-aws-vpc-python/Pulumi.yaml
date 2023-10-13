@@ -1,4 +1,4 @@
-name: aws-vpc-python
+name: day05-aws-vpc-python
 runtime:
   name: python
   options:

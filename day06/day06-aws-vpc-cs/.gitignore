@@ -1,0 +1,52 @@
+# Visual Studio Code
+.vscode/
+
+# Visual Studio for Mac
+.vscode/
+.idea/
+
+# Rider
+.idea/
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# User-specific directories
+_ReSharper*/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider-specific files
+.idea/
+
+# NuGet
+packages/
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# User-specific directories
+_ReSharper*/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# .NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Roslyn
+*.editorconfig
+
+# Rider
+.idea/
+
+obj/
+bin/

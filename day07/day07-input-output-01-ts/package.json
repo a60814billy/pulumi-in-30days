@@ -1,0 +1,11 @@
+{
+  "name": "day07-input-output-01-ts",
+  "main": "index.ts",
+  "devDependencies": {
+    "@types/node": "^16"
+  },
+  "dependencies": {
+    "@pulumi/pulumi": "^3.0.0",
+    "@pulumi/aws": "^5.0.0"
+  }
+}

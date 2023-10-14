@@ -1,0 +1,3 @@
+name: day07-input-output-01-java
+runtime: java
+description: A minimal AWS Java Pulumi program

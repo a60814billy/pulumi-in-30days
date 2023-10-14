@@ -1,0 +1,6 @@
+name: day07-input-output-01-python
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: A minimal AWS Python Pulumi program

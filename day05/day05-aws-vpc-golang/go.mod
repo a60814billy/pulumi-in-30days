@@ -1,4 +1,4 @@
-module github.com/a60814billy/day05/day05-aws-vpc-golang
+module github.com/a60814billy/pulumi-in-30days/day05/day05-aws-vpc-golang
 
 go 1.20
 
